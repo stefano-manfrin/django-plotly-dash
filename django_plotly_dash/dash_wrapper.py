@@ -519,7 +519,9 @@ class WrappedDash(Dash):
             response = {}
             replacements = {}
             # look for id entry
-            thisID = data.get('id', None)
+            thisID = data.get('id')
+            if thisID is None:
+                thisID = data.get('props', {}).get('id')
             if isinstance(thisID, dict):
                 # handle case of thisID being a dict (pattern) => linear search in overrides dict
                 thisID = wid2str(thisID)
